@@ -1,6 +1,5 @@
 package io.github.alistairholmes.digitalnomadjobs.ui.jobs;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -38,8 +35,6 @@ import io.github.alistairholmes.digitalnomadjobs.ui.favorite.FavoriteActivity;
 import io.github.alistairholmes.digitalnomadjobs.ui.jobdetail.DetailActivity;
 import io.github.alistairholmes.digitalnomadjobs.utils.DbUtil;
 import io.github.alistairholmes.digitalnomadjobs.utils.JobListItemDecoration;
-import io.github.alistairholmes.digitalnomadjobs.utils.Resource;
-import timber.log.Timber;
 
 public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobClickListener {
 
@@ -98,12 +93,12 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
             if (resource != null && resource.data.size() > 0) {
                 jobList = resource.data;
                 setupRecyclerView(resource.data);
-                loaderLottie.setVisibility(View.INVISIBLE);
             }
         });*/
 
         mAdapter = new JobAdapter(this, this);
         jobViewModel.jobsLiveData.observe(this, resource -> mAdapter.submitList(resource.data));
+        loaderLottie.setVisibility(View.INVISIBLE);
         mainRecyclerView.setAdapter(mAdapter);
 
     }
