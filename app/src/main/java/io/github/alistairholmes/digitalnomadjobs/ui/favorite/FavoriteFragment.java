@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,6 +84,8 @@ public class FavoriteFragment extends Fragment implements Injectable {
         favoriteRecyclerView.setLayoutManager(linearLayoutManager);
 
         favoriteRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        favoriteRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this.getActivity(), LinearLayout.VERTICAL));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
         itemTouchHelper.attachToRecyclerView(favoriteRecyclerView);

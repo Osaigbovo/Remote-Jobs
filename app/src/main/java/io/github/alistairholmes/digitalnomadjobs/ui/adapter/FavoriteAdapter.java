@@ -51,7 +51,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteViewHolder> {
     }
 
     public FavoriteJob removeItem(int position) {
-        //favMoviesList.remove(position);
         return favoriteJobs.get(position);
     }
 
