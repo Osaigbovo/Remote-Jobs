@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 public class JobViewModel extends ViewModel {
 
     private final JobRepository jobRepository;
-    public final LiveData<Resource<List<Job>>> jobsLiveData;
+    final LiveData<Resource<List<Job>>> jobsLiveData;
 
     @Inject
     JobViewModel(JobRepository jobRepository) {

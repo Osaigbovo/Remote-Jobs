@@ -1,13 +1,13 @@
 package io.github.alistairholmes.digitalnomadjobs.data.repository;
 
 import android.content.ContentResolver;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,13 +24,10 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
-import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
 
 import static io.github.alistairholmes.digitalnomadjobs.utils.DbUtil.FAVORITE_WIDGET_PROJECTION;
@@ -64,7 +61,6 @@ public class JobRepository {
     public Flowable<Resource<List<Job>>> retrieveJobs() {
 
 
-
         return Flowable.create(emitter -> {
             new NetworkBoundSource<List<Job>, List<Job>>(emitter) {
                 @Override
@@ -74,8 +70,15 @@ public class JobRepository {
                     /*compositeDisposable.add(requestInterface.getAllJobs()
                             .subscribe(t -> mJobsBehaviorSubject.onNext(t)));*/
 
+                    Observable<List<Job>> listObservable = requestInterface
+                            .getAllJobs()
+                            .flatMap(Observable::fromIterable)
+                            .filter(job -> !TextUtils.isEmpty(job.getCompany()))
+                            .toList()
+                            .toObservable();
+
                     return Observable
-                            .combineLatest(/*mJobsBehaviorSubject.hide()*/requestInterface.getAllJobs(), savedJobIds(),
+                            .combineLatest(/*mJobsBehaviorSubject.hide()*/listObservable, savedJobIds(),
                                     (jobList, favoriteIds) -> {
                                         for (Job job : jobList) {
                                             job.setFavorite(favoriteIds.contains(job.getId()));

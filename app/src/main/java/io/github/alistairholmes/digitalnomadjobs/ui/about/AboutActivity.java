@@ -31,15 +31,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(mToolbar);
 
         LinearLayout [] containers = new LinearLayout[] {
-                findViewById(R.id.container_about_app_website),
-                findViewById(R.id.container_about_app_github),
-                findViewById(R.id.container_about_app),
-                findViewById(R.id.container_about_rate),
-                findViewById(R.id.container_about_donate),
-                findViewById(R.id.container_about_bug),
-                findViewById(R.id.container_about_author),
-                findViewById(R.id.container_about_website),
-                findViewById(R.id.container_about_instagram),
                 findViewById(R.id.container_about_library1),
                 findViewById(R.id.container_about_library2),
                 findViewById(R.id.container_about_library3),
@@ -54,7 +45,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 findViewById(R.id.container_about_library13),
                 findViewById(R.id.container_about_library14)};
         for (LinearLayout r : containers) {
-            r.setOnClickListener((View.OnClickListener) this);
+            r.setOnClickListener(this);
         }
 
         PackageManager manager = getApplicationContext().getPackageManager();
@@ -72,22 +63,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
             /*case R.id.container_about_app:
                 goToURL("https://digitalnomadjobs.ml/");
                 break;*/
-
-            case R.id.container_about_app_website:
-                goToURL("https://digitalnomadjobs.ml");
-                break;
-
-            /*case R.id.container_about_donate:
-                startActivity(new Intent(AboutActivity.this, DonateActivity.class));
-                break;*/
-
-            case R.id.container_about_website:
-                goToURL("https://github.com/Osaigbovo");
-                break;
-
-            case R.id.container_about_instagram:
-                goToURL("https://www.instagram.com/0saigbovo/");
-                break;
 
             case R.id.container_about_library1:
                 goToURL("https://github.com/square/retrofit");

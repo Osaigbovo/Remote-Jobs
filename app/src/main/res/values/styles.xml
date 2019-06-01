@@ -1,27 +1,42 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="Theme.Dnj" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
         <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+
+        <item name="android:windowContentTransitions">true</item>
+
     </style>
 
-    <!-- This is a fix for window decor error -->
-    <style name="Theme.Dnj.NoActionBar">
+    <style name="AppTheme.Job">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:windowSharedElementExitTransition">@transition/detail_transition</item>
+    </style>
+
+    <style name="AppTheme.JobDetail">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_transition</item>
+    </style>
+
+    <style name="AppTheme.Favorite">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Dnj.Favorite">
+    <style name="AppTheme.About">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- Trying something here -->
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:textSize">10sp</item>
@@ -38,18 +53,60 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <!-- Chips Style -->
-    <style name="TextAppearance.Dnj.Chips" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/textColorChips</item>
-        <item name="fontFamily">@font/montserrat</item>
-        <item name="android:textStyle">normal</item>
+    <style name="JobImage">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">@drawable/image_border</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:contentDescription">@string/image_favorite_job</item>
+    </style>
+
+    <style name="JobTitle">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="JobCompany">
+        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="JobDate">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="JobDescription">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/text_16</item>
     </style>
 
     <!-- Details Button -->
-    <style name="Widget.Dnj.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">#FFFF</item>
-        <item name="backgroundTint">?attr/colorPrimaryDark</item>
+    <style name="JobButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_margin">@dimen/margin_16</item>
+        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="backgroundTintMode">multiply</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:text">@string/apply_job</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:typeface">normal</item>
+        <item name="cornerRadius">50dp</item>
     </style>
 
     <!-- Widget -->
@@ -132,13 +189,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
-    </style>
-
-    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
 </resources>

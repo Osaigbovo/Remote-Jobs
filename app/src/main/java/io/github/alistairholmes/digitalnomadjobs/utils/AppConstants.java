@@ -10,8 +10,7 @@ public class AppConstants {
     // API Constants
     public static final String BASE_URL = "https://remoteok.io";
     public static final String BASE_IMAGE_URL = "https://remoteok.io/assets/jobs/";
-
-    //public static final String SELECTED_STOCK_COMPANY_NAME = "selectedStockCompany";
+    public static final String REMOTEOK_URL = "https://remoteok.io/l/";
     public static final String SELECTED_JOB_POSITION = "selectedJobPosition";
 
 

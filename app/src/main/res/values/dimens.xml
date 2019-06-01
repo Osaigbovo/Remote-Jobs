@@ -2,14 +2,37 @@
 <resources>
     <dimen name="job_item_spacing_small">8dp</dimen>
 
+    <dimen name="text_12">12sp</dimen>
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="text_24">24sp</dimen>
+    <dimen name="text_32">32sp</dimen>
+
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
+    <dimen name="padding_32">32dp</dimen>
+
+
+    <!-- Jobs -->
+    <dimen name="corner_radius">12dp</dimen>
+
+    <!-- Favorite -->
+    <dimen name="icon_size">12dp</dimen>
+
+    <!-- Detail-->
+
 
     <!-- Widget -->
     <dimen name="widget_elevation">4dp</dimen>
     <dimen name="widget_header_height">56dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
-
     <dimen name="marginStart_widget_list_title">24dp</dimen>
-
     <dimen name="widget_list_divider_height">0.5dp</dimen>
 
     <dimen name="paddingStartWidgetListItem">16dp</dimen>

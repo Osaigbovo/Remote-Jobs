@@ -6,21 +6,28 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import java.util.List;
 
 import io.github.alistairholmes.digitalnomadjobs.R;
 import io.github.alistairholmes.digitalnomadjobs.data.local.entity.FavoriteJob;
 import io.github.alistairholmes.digitalnomadjobs.data.repository.JobRepository;
+import io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
 import static io.github.alistairholmes.digitalnomadjobs.utils.AppConstants.SELECTED_JOB_POSITION;
+import static io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil.convertDrawableToBitmaps;
+import static io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil.drawableToBitmap;
+import static io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil.getBitmap;
+import static io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil.getDrawableLogo;
 
 public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -80,13 +87,21 @@ public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteView
         remoteViews.setTextViewText(R.id.widget_company, favoriteJobs.get(position).getCompany());
 
         try {
-            Bitmap bitmap = Glide.with(mContext.getApplicationContext())
-                    .asBitmap()
-                    .placeholder(R.color.textPrimary)
-                    .load(favoriteJobs.get(position).getCompany_logo())
-                    .submit(512, 512)
-                    .get();
-            remoteViews.setImageViewBitmap(R.id.widget_company_logo, bitmap);
+            if (!TextUtils.isEmpty(favoriteJobs.get(position).getCompany_logo())) {
+                int radius = mContext.getResources().getDimensionPixelSize(R.dimen.corner_radius);
+                Bitmap bitmap = Glide.with(mContext.getApplicationContext())
+                        .asBitmap()
+                        .transform(new RoundedCorners(radius))
+                        .placeholder(R.color.textPrimary)
+                        .load(favoriteJobs.get(position).getCompany_logo())
+                        .submit(512, 512)
+                        .get();
+                remoteViews.setImageViewBitmap(R.id.widget_company_logo, bitmap);
+            }else{
+                remoteViews.setImageViewBitmap(R.id.widget_company_logo,
+                        drawableToBitmap(getDrawableLogo(favoriteJobs.get(position).getCompany())));
+            }
+
         } catch (Exception e) {
             e.toString();
         }

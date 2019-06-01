@@ -4,17 +4,34 @@
     <string name="no_internet_connection">Please connect to the Internet and relaunch the app.</string>
     <string name="format_date">dd MMM</string>
 
+    <!-- Transition -->
+    <string name="transition_image_name" translatable="false">logo</string>
+    <string name="transition_title_name" translatable="false">title</string>
 
+    <!-- Jobs -->
+    <string name="image_job">Image of a Job</string>
+    <string name="company_job">SquareSpace</string>
+    <string name="position_job">Front-end Dev</string>
+    <string name="date_posted">16 June</string>
+    <string name="description_label_job">Job Description</string>
+    <string name="apply_job">Apply for Job</string>
+    <string name="no_description_job">No Description For This Job Is Available</string>
+    <string name="description_job">Activity transitions in material design apps provide visual connections
+        between different states through motion and transformations between common elements. You can specify
+        custom animations for enter and exit transitions and for transitions of shared elements between activities.</string>
 
+    <!-- Details -->
+    <string name="detail_jobs">Job Details</string>
+    <string name="image_detail_job">Image of a Job detail</string>
 
-    <!-- Category Buttons -->
-    <string name="chip_all">All</string>
-    <string name="chip_android">Android</string>
-    <string name="chip_frontend">Frontend</string>
-    <string name="chip_javascript">JavaScript</string>
-    <string name="chip_devops">DevOps</string>
-    <string name="chip_ios">iOS</string>
-    <string name="chip_php">PHP</string>
+    <!-- Favorite -->
+    <string name="favorite_jobs">Favorite Jobs</string>
+    <string name="favorite_job_removed">\s is removed from Favorites!</string>
+    <string name="undo">UNDO</string>
+    <string name="image_favorite_job">Image of a Favorite Job</string>
+    <string name="image_no_favorites">Empty Favorites List</string>
+    <string name="no_favorites">No Jobs Here</string>
+    <string name="add_favorites">Add a Job to your favorites list</string>
 
     <!-- Libraries -->
     <string name="about_libraries_card_title">Libraries</string>
@@ -44,14 +61,6 @@
     <string name="about_library13_subtitle" translatable="false">A logger with a small, extensible API which provides utility on top of Androids normal Log class.</string>
     <string name="about_library14_title" translatable="false">TextDrawable</string>
     <string name="about_library14_subtitle" translatable="false">This light-weight library provides images with letter/text like the Gmail app.</string>
-
-
-    <!-- Favorite -->
-    <string name="favorite_jobs">Favorite Jobs</string>
-    <string name="image_favorite_job">Image of a Favorite Job</string>
-    <string name="image_no_favorites">Empty Favorites List</string>
-    <string name="no_favorites">No Jobs Here</string>
-    <string name="add_favorites">Add a Job to your favorites list</string>
 
     <!-- ContentProvider -->
     <string name="content_authority">io.github.alistairholmes.digitalnomadjobs.data.provider</string>

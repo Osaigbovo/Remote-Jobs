@@ -1,103 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.jobdetail.DetailActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/app_bar"
-        android:theme="@style/ToolbarTheme"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        app:title="Details"/>
-
-    <TextView
-        android:id="@+id/textView_jobtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/montserrat"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/imageView_Logo"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar"
-        tools:text="Front-end Dev" />
-
-    <TextView
-        android:id="@+id/textView_companyname"
-        android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/imageView_Logo"
-        app:layout_constraintTop_toBottomOf="@+id/textView_jobtitle"
-        tools:text="SquareSpace" />
-
-
-    <ImageView
-        android:id="@+id/imageView_Logo"
-        android:layout_width="80dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
-
-    <ScrollView
-        android:id="@+id/scroll_view"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/favorite_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_Logo">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:transitionGroup="false">
 
-        <TextView
-            android:id="@+id/textView_description"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/details_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarTheme"
+            app:navigationIcon="?attr/homeAsUpIndicator" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"
-            android:text="TextView"
-            android:fontFamily="@font/montserrat"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:lineSpacingExtra="3dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_Logo" />
+            android:layout_margin="@dimen/margin_8">
 
-    </ScrollView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_applyforjob"
-        style="@style/Widget.Dnj.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:text="APPLY FOR JOB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scroll_view" />
+                <ImageView
+                    android:id="@+id/image_detail_logo"
+                    style="@style/JobImage"
+                    android:layout_width="80dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:contentDescription="@string/image_detail_job"
+                    android:transitionName="@string/transition_image_name"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_position"
+                    style="@style/JobTitle"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_8"
+                    android:textSize="@dimen/text_20"
+                    android:transitionName="@string/transition_title_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/image_detail_logo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/position_job" />
+
+                <TextView
+                    android:id="@+id/text_company"
+                    style="@style/JobCompany"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_8"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="normal|bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_position"
+                    app:layout_constraintTop_toBottomOf="@+id/text_position"
+                    tools:text="@string/company_job" />
+
+                <TextView
+                    android:id="@+id/text_date"
+                    style="@style/JobDate"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_8"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_company"
+                    tools:text="@string/date_posted" />
+
+                <TextView
+                    android:id="@+id/text_description_label"
+                    style="@style/JobDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="@string/description_label_job"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_detail_logo" />
+
+                <TextView
+                    android:id="@+id/text_description"
+                    style="@style/JobDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_description_label"
+                    tools:text="@string/description_job" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_apply"
+                    style="@style/JobButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_description" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

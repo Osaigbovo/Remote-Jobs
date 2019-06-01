@@ -35,6 +35,14 @@ public class FavoriteViewModel extends ViewModel {
         jobRepository.removeFavorite(favoriteJob);
     }
 
+    void setJobFavored(FavoriteJob favoriteJob, boolean favorite) {
+        if (favorite) {
+            jobRepository.addFavorite(favoriteJob);
+        } else {
+            jobRepository.removeFavorite(favoriteJob);
+        }
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();

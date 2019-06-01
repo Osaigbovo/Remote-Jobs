@@ -1,18 +1,22 @@
 package io.github.alistairholmes.digitalnomadjobs.ui.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
+import android.transition.Transition;
+import android.transition.TransitionListenerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import java.util.List;
 
@@ -22,6 +26,7 @@ import io.github.alistairholmes.digitalnomadjobs.ui.viewholder.JobViewHolder;
 import io.github.alistairholmes.digitalnomadjobs.utils.GlideApp;
 
 import static io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil.formatDayMonth;
+import static io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil.getDrawableLogo;
 
 public class JobAdapter extends RecyclerView.Adapter<JobViewHolder> {
 
@@ -30,8 +35,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobViewHolder> {
     private final Context context;
 
     public interface OnJobClickListener {
-        void onJobClick(Job job);
-
+        void onJobClick(Job job, ImageView imageView, TextView textView);
         void onFavoredClicked(@NonNull final Job job, boolean isFavorite, int position);
     }
 
@@ -62,7 +66,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobViewHolder> {
         final Job currentJob = mDiffer.getCurrentList().get(position);
 
         jobViewHolder.itemView.setOnClickListener(view -> {
-            if (onJobClickListener != null) onJobClickListener.onJobClick(currentJob);
+            if (onJobClickListener != null)
+                onJobClickListener.onJobClick(currentJob, jobViewHolder.companyLogo, jobViewHolder.jobTitle);
         });
 
         jobViewHolder.jobTitle.setText(currentJob.getPosition());
@@ -70,19 +75,15 @@ public class JobAdapter extends RecyclerView.Adapter<JobViewHolder> {
         String dateFormat = formatDayMonth(context, currentJob.getDate());
         jobViewHolder.datePosted.setText(dateFormat);
 
-        // TODO 3 Use RoundedCornered ImageView
         if (!TextUtils.isEmpty(currentJob.getCompany_logo())) {
+            int radius = context.getResources().getDimensionPixelSize(R.dimen.corner_radius);
             GlideApp.with(context)
                     .load(currentJob.getCompany_logo())
-                    //.placeholder(R.drawable.ic_launcher_foreground)
+                    .transform(new RoundedCorners(radius))
+                    .placeholder(R.drawable.ic_launcher_foreground)
                     .into(jobViewHolder.companyLogo);
-        } else if (!TextUtils.isEmpty(currentJob.getCompany())) {
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            int color = generator.getRandomColor();
-            TextDrawable drawable = TextDrawable
-                    .builder()
-                    .buildRoundRect(currentJob.getCompany().substring(0, 1).toUpperCase(), color, 50);
-            jobViewHolder.companyLogo.setImageDrawable(drawable);
+        } else {
+            jobViewHolder.companyLogo.setImageDrawable(getDrawableLogo(currentJob.getCompany()));
         }
 
         jobViewHolder.favoriteButton.isFavorite(currentJob.isFavorite());
@@ -90,7 +91,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobViewHolder> {
             jobViewHolder.favoriteButton.toggleWishlisted();
             onJobClickListener.onFavoredClicked(currentJob, !currentJob.isFavorite(), position);
         });
-
     }
 
     private static final DiffUtil.ItemCallback DIFF_CALLBACK = new DiffUtil.ItemCallback<Job>() {

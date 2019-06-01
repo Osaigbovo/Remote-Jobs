@@ -2,8 +2,11 @@ package io.github.alistairholmes.digitalnomadjobs.ui.jobdetail;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
+import android.text.TextUtils;
+import android.transition.Transition;
+import android.transition.TransitionListenerAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,93 +14,154 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.github.alistairholmes.digitalnomadjobs.R;
-import io.github.alistairholmes.digitalnomadjobs.ui.jobs.JobActivity;
+import io.github.alistairholmes.digitalnomadjobs.data.local.entity.FavoriteJob;
+import io.github.alistairholmes.digitalnomadjobs.data.model.Job;
+import io.github.alistairholmes.digitalnomadjobs.utils.AppConstants;
+import io.github.alistairholmes.digitalnomadjobs.utils.GlideApp;
+import io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil;
+
+import static io.github.alistairholmes.digitalnomadjobs.utils.ViewUtil.getDrawableLogo;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public TextView tv_JobTitle;
-    public TextView tv_CompanyName;
-    public TextView tv_JobDescription;
-    public int jobID;
-    public ImageView iv_CompanyLogo;
-    public final String REMOTEOK_URL = "https://remoteok.io/l/";
+    public static final String ARG_DETAIL_JOB = "detail_job";
+
+    @BindView(R.id.details_toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.text_position)
+    TextView jobTitle;
+    @BindView(R.id.text_company)
+    TextView companyName;
+    @BindView(R.id.image_detail_logo)
+    ImageView companyLogo;
+    @BindView(R.id.text_date)
+    TextView date;
+    @BindView(R.id.text_description)
+    TextView description;
+    @BindString(R.string.no_description_job)
+    String no_description;
+
+    private Job job;
+    private FavoriteJob favoriteJob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
 
-        // toolbar
-        Toolbar toolbar = findViewById(R.id.app_bar);
-
-        toolbar.setNavigationOnClickListener(v -> {
-            // back button pressed
-            Intent intent = new Intent(DetailActivity.this, JobActivity.class);
-            //finally start the activity
-            startActivity(intent);
-        });
-
-        tv_JobTitle = findViewById(R.id.textView_jobtitle);
-        tv_CompanyName = findViewById(R.id.textView_companyname);
-        iv_CompanyLogo = findViewById(R.id.imageView_Logo);
-        tv_JobDescription = findViewById(R.id.textView_description);
-
-
-        //get the intent in the target activity
-        Intent intent = getIntent();
-        //get the attached bundle from the intent
-        Bundle extras = intent.getExtras();
-        //Extracting the stored data from the bundle
-        String job_title = extras.getString("JOB_TITLE");
-        String company_name = extras.getString("COMPANY_NAME");
-        String company_logo = extras.getString("COMPANY_LOGO");
-        String job_description = extras.getString("JOB_DESCRIPTION");
-        jobID = extras.getInt("JOB_ID");
-
-        tv_JobTitle.setText(job_title);
-        tv_CompanyName.setText(company_name);
-        tv_JobDescription.setText(job_description);
-
-
-        /*Glide.with(this)
-                .load(company_logo)
-                .into(iv_CompanyLogo);*/
-
-        if (company_logo != null) {
-            Glide.with(this)
-                    .load(company_logo)
-                    .into(iv_CompanyLogo);
-        } else  {
-            ColorGenerator generator = ColorGenerator.MATERIAL;
-            int color = generator.getRandomColor();
-            TextDrawable drawable = TextDrawable
-                    .builder()
-                    .buildRoundRect(company_name.substring(0, 1).toUpperCase(), color, 50);
-            iv_CompanyLogo.setImageDrawable(drawable);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            toolbar.setNavigationOnClickListener(view -> {
+                DetailActivity.this.onBackPressed();
+                finishAfterTransition();
+            });
         }
 
-        final String jobURL = REMOTEOK_URL + jobID;
-
-        // Set a click listener for when the apply for job button is pressed
-        findViewById(R.id.btn_applyforjob).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Use a CustomTabsIntent.Builder to configure CustomTabsIntent.
-                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                // set toolbar color and set custom actions before invoking build()
-                builder.setToolbarColor(ContextCompat.getColor(DetailActivity.this, R.color.colorAccent));
-                // Once ready, call CustomTabsIntent.Builder.build() to create a CustomTabsIntent
-                CustomTabsIntent customTabsIntent = builder.build();
-                // and launch the desired Url with CustomTabsIntent.launchUrl()
-                customTabsIntent.launchUrl(DetailActivity.this, Uri.parse(jobURL));
+        Intent intent = getIntent();
+        if (intent.hasExtra(ARG_DETAIL_JOB)) {
+            if (intent.getExtras().getParcelable(ARG_DETAIL_JOB) instanceof Job) {
+                this.job = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
+            } else if (intent.getExtras().getParcelable(ARG_DETAIL_JOB) instanceof FavoriteJob) {
+                this.favoriteJob = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
             }
-        });
+        }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            final Transition sharedElementEnterTransition =
+                    getWindow().getSharedElementEnterTransition();
+            if (sharedElementEnterTransition != null) {
+                sharedElementEnterTransition.addListener(new TransitionListenerAdapter() {
+                    @Override
+                    public void onTransitionStart(Transition transition) {
+                        loadImage();
+                    }
+
+                    @Override
+                    public void onTransitionEnd(Transition transition) {
+                        transition.removeListener(this);
+                    }
+                });
+            }
+            final Transition sharedElementReturnTransition =
+                    getWindow().getSharedElementReturnTransition();
+            if (sharedElementReturnTransition != null) {
+                sharedElementReturnTransition.addListener(new TransitionListenerAdapter() {
+                    @Override
+                    public void onTransitionStart(final Transition transition) {
+                    }
+                });
+            }
+        } else{
+            loadImage();
+        }
+
+        setJobDetails();
     }
+
+    private void setJobDetails() {
+        jobTitle.setText(job != null ? job.getPosition() : favoriteJob.getPosition());
+        companyName.setText(job != null ? job.getCompany() : favoriteJob.getCompany());
+
+        date.setText(job != null ? ViewUtil.formatDayMonth(this, job.getDate())
+                : ViewUtil.formatDayMonth(this, favoriteJob.getDate()));
+
+        description.setText(job != null ? !TextUtils.isEmpty(job.getDescription())
+                ? HtmlCompat.fromHtml(job.getDescription(), 0) : no_description :
+                !TextUtils.isEmpty(favoriteJob.getDescription())
+                ? HtmlCompat.fromHtml(favoriteJob.getDescription(), 0) : no_description);
+    }
+
+    private void loadImage() {
+        int radius = getResources().getDimensionPixelSize(R.dimen.corner_radius);
+        if(job != null){
+            if (!TextUtils.isEmpty(job.getCompany_logo())) {
+                GlideApp.with(this)
+                        .load(job.getCompany_logo())
+                        .transform(new RoundedCorners(radius))
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .into(companyLogo);
+            } else {
+                companyLogo.setImageDrawable(getDrawableLogo(job.getCompany()));
+            }
+        } else{
+            if (!TextUtils.isEmpty(favoriteJob.getCompany_logo())) {
+                GlideApp.with(this)
+                        .load(favoriteJob.getCompany_logo())
+                        .transform(new RoundedCorners(radius))
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .into(companyLogo);
+            } else {
+                companyLogo.setImageDrawable(getDrawableLogo(favoriteJob.getCompany()));
+            }
+        }
+    }
+
+    @OnClick(R.id.btn_apply)
+    void clickAppy() {
+        final String jobURL = AppConstants.REMOTEOK_URL + job.getId();
+
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent));
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(jobURL));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAfterTransition();
+    }
+
 }

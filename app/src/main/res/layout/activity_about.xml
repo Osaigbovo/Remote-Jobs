@@ -47,292 +47,26 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
                         style="@style/about_title_text"
-                        android:text="Info" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_app"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/about_info"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="Digital Nomad Jobs"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="Developed to help people find a remote job"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_app_website"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/baseline_public_24"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="Website"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_app_github"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/baseline_star_24"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="Star on Github"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="#ffff"
-                android:layout_marginTop="10dp"
-                android:paddingTop="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        style="@style/about_title_text"
-                        android:text="Author" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_author"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/baseline_account_box_24"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="Osai.G.Bovo"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="Lagos, Nigeria"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_website"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/baseline_public_24"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="Website"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_instagram"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/about_instagram"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="Follow on Instagram"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="#ffff"
-                android:layout_marginTop="10dp"
-                android:paddingTop="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        android:text="Support Development"
-                        style="@style/about_title_text"/>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_rate"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/baseline_star_24"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="Rate"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="If you like Digital Nomad Jobs, rate it on the Play Store"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_donate"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/baseline_mood_24"
-                            style="@style/material_icon" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="Donate"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="If you really like Digital Nomad Jobs, consider supporting its development by sending me a couple of dollars"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_bug"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="@drawable/baseline_bug_report_24"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="Report Bugs"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="Report bugs or request new features"
-                                style="@style/about_subtitle_text"
-                                android:paddingBottom="10dp"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="#ffff"
-                android:layout_marginTop="10dp"
-                android:paddingTop="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        style="@style/about_title_text"
-                        android:text="Libraries" />
+                        android:text="Libraries"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library1"
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library1_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library1_title" />
 
                         <TextView
-                            android:text="@string/about_library1_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library1_subtitle" />
 
                     </LinearLayout>
 
@@ -346,12 +80,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library2_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library2_title" />
 
                         <TextView
-                            android:text="@string/about_library2_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library2_subtitle" />
 
                     </LinearLayout>
 
@@ -365,12 +99,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library3_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library3_title" />
 
                         <TextView
-                            android:text="@string/about_library3_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library3_subtitle" />
 
                     </LinearLayout>
 
@@ -384,12 +118,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library4_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library4_title" />
 
                         <TextView
-                            android:text="@string/about_library4_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library4_subtitle" />
 
                     </LinearLayout>
 
@@ -403,12 +137,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library5_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library5_title" />
 
                         <TextView
-                            android:text="@string/about_library5_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library5_subtitle" />
 
                     </LinearLayout>
 
@@ -422,12 +156,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library6_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library6_title" />
 
                         <TextView
-                            android:text="@string/about_library6_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library6_subtitle" />
 
                     </LinearLayout>
 
@@ -441,12 +175,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library7_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library7_title" />
 
                         <TextView
-                            android:text="@string/about_library7_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library7_subtitle" />
 
                     </LinearLayout>
 
@@ -460,12 +194,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library9_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library9_title" />
 
                         <TextView
-                            android:text="@string/about_library9_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library9_subtitle" />
 
                     </LinearLayout>
 
@@ -479,12 +213,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library10_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library10_title" />
 
                         <TextView
-                            android:text="@string/about_library10_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library10_subtitle" />
 
                     </LinearLayout>
 
@@ -498,12 +232,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library11_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library11_title" />
 
                         <TextView
-                            android:text="@string/about_library11_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library11_subtitle" />
 
                     </LinearLayout>
 
@@ -517,12 +251,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library12_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library12_title" />
 
                         <TextView
-                            android:text="@string/about_library12_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library12_subtitle" />
 
                     </LinearLayout>
 
@@ -536,12 +270,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library13_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library13_title" />
 
                         <TextView
-                            android:text="@string/about_library13_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library13_subtitle" />
 
                     </LinearLayout>
 
@@ -555,12 +289,12 @@
                         style="@style/about_library">
 
                         <TextView
-                            android:text="@string/about_library14_title"
-                            style="@style/about_title_text"/>
+                            style="@style/about_title_text"
+                            android:text="@string/about_library14_title" />
 
                         <TextView
-                            android:text="@string/about_library14_subtitle"
-                            style="@style/about_subtitle_text"/>
+                            style="@style/about_subtitle_text"
+                            android:text="@string/about_library14_subtitle" />
 
                     </LinearLayout>
 
