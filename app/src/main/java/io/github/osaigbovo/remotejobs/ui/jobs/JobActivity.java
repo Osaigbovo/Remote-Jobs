@@ -24,6 +24,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +46,8 @@ import io.github.osaigbovo.remotejobs.utils.DbUtil;
 import static io.github.osaigbovo.remotejobs.ui.jobdetail.DetailActivity.ARG_DETAIL_JOB;
 
 public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobClickListener {
+
+    private static FirebaseAnalytics firebaseAnalytics;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -66,6 +71,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
@@ -75,6 +81,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
                 .get(JobViewModel.class);
 
         setupRecyclerView();
+
     }
 
     private void setupRecyclerView() {
@@ -88,11 +95,19 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
         mAdapter = new JobAdapter(this, this);
         jobViewModel.jobsLiveData.observe(this, resource -> {
             if (resource.data != null) {
+                a(resource.data);
                 progressBar.setVisibility(View.GONE);
                 mAdapter.submitList(resource.data);
             }
         });
         mainRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void a(List<Job> jobList) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(FirebaseAnalytics.Param.ITEM_LIST, new ArrayList<>(jobList));
+        bundle.putString(FirebaseAnalytics.Param.QUANTITY, String.valueOf(jobList.size()));
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM_LIST, bundle);
     }
 
     private void initSwipeToRefresh() {
@@ -135,6 +150,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(ARG_DETAIL_JOB, job);
 
+        //noinspection unchecked
         ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
                 new Pair<>(imageView, getResources().getString(R.string.transition_image_name)),
@@ -146,19 +162,6 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
     @Override
     public void onFavoredClicked(@NonNull Job job, boolean isFavorite, int position) {
         jobViewModel.setJobFavored(job, isFavorite);
-
-        //Timber.e("onFavoredClicked: favored=%s", isFavorite);
-
-        /*if (isFavorite) {
-            Snackbar.make(findViewById(R.id.container),
-                    job.getPosition().substring(0, 10) + "... is removed to Favorites!",
-                    Snackbar.LENGTH_SHORT).show();
-        } else {
-            Snackbar.make(findViewById(R.id.container),
-                    job.getPosition().substring(0, 10) + "... is added from Favorites!",
-                    Snackbar.LENGTH_SHORT).show();
-        }*/
-
         DbUtil.updateWidgets(this);
     }
 

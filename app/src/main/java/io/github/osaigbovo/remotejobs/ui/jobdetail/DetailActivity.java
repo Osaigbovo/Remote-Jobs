@@ -18,6 +18,8 @@ import androidx.core.text.HtmlCompat;
 
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
+import java.util.Objects;
+
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,7 +73,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra(ARG_DETAIL_JOB)) {
-            if (intent.getExtras().getParcelable(ARG_DETAIL_JOB) instanceof Job) {
+            if (Objects.requireNonNull(intent.getExtras()).getParcelable(ARG_DETAIL_JOB) instanceof Job) {
                 this.job = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
             } else if (intent.getExtras().getParcelable(ARG_DETAIL_JOB) instanceof FavoriteJob) {
                 this.favoriteJob = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
@@ -100,6 +102,7 @@ public class DetailActivity extends AppCompatActivity {
                 sharedElementReturnTransition.addListener(new TransitionListenerAdapter() {
                     @Override
                     public void onTransitionStart(final Transition transition) {
+                        loadImage();
                     }
                 });
             }

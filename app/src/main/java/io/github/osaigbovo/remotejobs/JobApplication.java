@@ -24,7 +24,8 @@ import dagger.android.HasServiceInjector;
 import io.github.osaigbovo.remotejobs.di.AppInjector;
 import timber.log.Timber;
 
-public class JobApplication extends MultiDexApplication implements HasActivityInjector, HasContentProviderInjector, HasServiceInjector {
+public class JobApplication extends MultiDexApplication
+        implements HasActivityInjector, HasContentProviderInjector, HasServiceInjector {
 
     private static JobApplication instance;
     public Context context;
