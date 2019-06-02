@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "io.github.alistairholmes.digitalnomadjobs"
+        applicationId "io.github.osaigbovo.remotejobs"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 4

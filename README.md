@@ -18,7 +18,7 @@ A remote job aggregator app for android.
 
 # Download
 
-<a href="https://play.google.com/store/apps/details?id=io.github.alistairholmes.digitalnomadjobs" target="_blank">
+<a href="https://play.google.com/store/apps/details?id=remotejobs" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="70"/></a> 
 
 

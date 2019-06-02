@@ -60,7 +60,7 @@
             app:layout_constraintTop_toTopOf="@+id/text_job_title"
             tools:text="@string/date_posted" />
 
-        <io.github.alistairholmes.digitalnomadjobs.ui.views.WishListIconView
+        <io.github.osaigbovo.remotejobs.ui.views.WishListIconView
             android:id="@+id/favoriteIcon"
             android:layout_width="48dp"
             android:layout_height="48dp"
