@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="?attr/actionBarSize"
+    tools:showIn="@layout/activity_about">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="@dimen/corner_radius"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_title_label"
+                style="@style/about_title_text"
+                android:layout_marginStart="@dimen/margin_32"
+                android:layout_marginTop="@dimen/margin_32"
+                android:text="@string/about_libraries_card_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_retrofit"
+                style="@style/about_title_text"
+                android:layout_marginTop="@dimen/margin_32"
+                android:text="@string/about_library1_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_label" />
+
+            <TextView
+                android:id="@+id/text_retrofit_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library1_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_retrofit" />
+
+            <View
+                android:id="@+id/view_retrofit"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_retrofit_desc" />
+
+            <TextView
+                android:id="@+id/text_glide"
+                style="@style/about_title_text"
+                android:text="@string/about_library2_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_retrofit" />
+
+            <TextView
+                android:id="@+id/text_glide_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library2_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_glide" />
+
+            <View
+                android:id="@+id/view_glide"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_glide_desc" />
+
+            <TextView
+                android:id="@+id/text_androidx"
+                style="@style/about_title_text"
+                android:text="@string/about_library3_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_glide" />
+
+            <TextView
+                android:id="@+id/text_androidx_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library3_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_androidx" />
+
+            <View
+                android:id="@+id/view_androidx"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_androidx_desc" />
+
+            <TextView
+                android:id="@+id/text_lottie"
+                style="@style/about_title_text"
+                android:text="@string/about_library4_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_androidx" />
+
+            <TextView
+                android:id="@+id/text_lottie_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library4_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_lottie" />
+
+            <View
+                android:id="@+id/view_lottie"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_lottie_desc" />
+
+
+            <TextView
+                android:id="@+id/text_room"
+                style="@style/about_title_text"
+                android:text="@string/about_library5_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_lottie" />
+
+            <TextView
+                android:id="@+id/text_room_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library5_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_room" />
+
+            <View
+                android:id="@+id/view_room"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_room_desc" />
+
+
+            <TextView
+                android:id="@+id/text_rxjava"
+                style="@style/about_title_text"
+                android:text="@string/about_library6_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_room" />
+
+            <TextView
+                android:id="@+id/text_rxjava_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library6_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_rxjava" />
+
+            <View
+                android:id="@+id/view_rxjava"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_rxjava_desc" />
+
+            <TextView
+                android:id="@+id/text_butter"
+                style="@style/about_title_text"
+                android:text="@string/about_library7_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_rxjava" />
+
+            <TextView
+                android:id="@+id/text_butter_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library7_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_butter" />
+
+            <View
+                android:id="@+id/view_butter"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_butter_desc" />
+
+
+            <TextView
+                android:id="@+id/text_dagger"
+                style="@style/about_title_text"
+                android:text="@string/about_library9_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_butter" />
+
+            <TextView
+                android:id="@+id/text_dagger_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library9_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dagger" />
+
+            <View
+                android:id="@+id/view_dagger"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dagger_desc" />
+
+            <TextView
+                android:id="@+id/text_gson"
+                style="@style/about_title_text"
+                android:text="@string/about_library10_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_dagger" />
+
+            <TextView
+                android:id="@+id/text_gson_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library10_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_gson" />
+
+            <View
+                android:id="@+id/view_gson"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_gson_desc" />
+
+            <TextView
+                android:id="@+id/text_stetho"
+                style="@style/about_title_text"
+                android:text="@string/about_library11_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_gson" />
+
+            <TextView
+                android:id="@+id/text_stetho_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library11_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_stetho" />
+
+            <View
+                android:id="@+id/view_stetho"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_stetho_desc" />
+
+            <TextView
+                android:id="@+id/text_leak"
+                style="@style/about_title_text"
+                android:text="@string/about_library12_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_stetho" />
+
+            <TextView
+                android:id="@+id/text_leak_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library12_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_leak" />
+
+            <View
+                android:id="@+id/view_leak"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_leak_desc" />
+
+
+            <TextView
+                android:id="@+id/text_timber"
+                style="@style/about_title_text"
+                android:text="@string/about_library13_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_leak" />
+
+            <TextView
+                android:id="@+id/text_timber_desc"
+                style="@style/about_sub_title_text"
+                android:text="@string/about_library13_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_timber" />
+
+            <View
+                android:id="@+id/view_timber"
+                style="@style/about_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_timber_desc" />
+
+
+            <TextView
+                android:id="@+id/text_drawable"
+                style="@style/about_title_text"
+                android:text="@string/about_library14_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_timber" />
+
+            <TextView
+                android:id="@+id/text_text_drawable_desc"
+                style="@style/about_sub_title_text"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:text="@string/about_library14_subtitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_drawable" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.core.widget.NestedScrollView>

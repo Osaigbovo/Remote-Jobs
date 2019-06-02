@@ -64,8 +64,6 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
 
     private JobAdapter mAdapter;
 
-    private List<Job> jobList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
