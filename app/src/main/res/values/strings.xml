@@ -63,7 +63,7 @@
     <string name="about_library14_subtitle" translatable="false">This light-weight library provides images with letter/text like the Gmail app.</string>
 
     <!-- ContentProvider -->
-    <string name="content_authority">io.github.alistairholmes.digitalnomadjobs.data.provider</string>
+    <string name="content_authority">io.github.osaigbovo.remotejobs.data.provider</string>
 
     <!-- App Widget -->
     <string name="appwidget_text">EXAMPLE</string>

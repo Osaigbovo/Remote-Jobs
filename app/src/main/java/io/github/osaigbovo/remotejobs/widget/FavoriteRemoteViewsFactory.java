@@ -22,7 +22,7 @@ import io.github.osaigbovo.remotejobs.data.repository.JobRepository;
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
-import static io.github.osaigbovo.remotejobs.utils.AppConstants.SELECTED_JOB_POSITION;
+import static io.github.osaigbovo.remotejobs.ui.jobdetail.DetailActivity.ARG_DETAIL_JOB;
 import static io.github.osaigbovo.remotejobs.utils.ViewUtil.drawableToBitmap;
 import static io.github.osaigbovo.remotejobs.utils.ViewUtil.getDrawableLogo;
 
@@ -94,7 +94,7 @@ public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteView
                         .submit(512, 512)
                         .get();
                 remoteViews.setImageViewBitmap(R.id.widget_company_logo, bitmap);
-            }else{
+            } else {
                 remoteViews.setImageViewBitmap(R.id.widget_company_logo,
                         drawableToBitmap(getDrawableLogo(favoriteJobs.get(position).getCompany())));
             }
@@ -104,9 +104,11 @@ public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteView
         }
 
         Bundle extras = new Bundle();
-        extras.putInt(SELECTED_JOB_POSITION, position);
+        extras.putParcelable(ARG_DETAIL_JOB, favoriteJobs.get(position));
+
         Intent intent = new Intent();
         intent.putExtras(extras);
+
         remoteViews.setOnClickFillInIntent(R.id.widget_list_item, intent);
 
         return remoteViews;

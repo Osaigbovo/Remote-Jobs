@@ -39,7 +39,6 @@ public class FavoriteJobsAppWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
-        // TODO: Come back here for any issues
         for (int appWidgetId : appWidgetIds) {
             // RemoteViews describe view hierarchy in another process
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_list);
@@ -59,13 +58,8 @@ public class FavoriteJobsAppWidget extends AppWidgetProvider {
             remoteViews.setRemoteAdapter(R.id.widget_list,
                     new Intent(context, FavoriteJobWidgetService.class));
 
-            // The empty view is displayed when the collection has no items. It should be a sibling
-            // of the collection view.
+            // The empty view is displayed when the collection has no items.
             remoteViews.setEmptyView(R.id.widget_list, R.id.widget_empty);
-
-            // Finished setting up remoteViews except looking up and binding data (background thread operation)
-            // Do that in DetailWidgetRemoteViewsService. We can even do it here with observables.
-            // This invariably calls the 'onDataSetChanged' method in RemoteViewsFactory
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }

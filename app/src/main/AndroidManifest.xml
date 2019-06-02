@@ -70,7 +70,7 @@
             android:name="io.github.osaigbovo.remotejobs.data.provider.JobsProvider"
             android:authorities="@string/content_authority"
             android:exported="true"
-            android:permission="io.github.alistairholmes.digitalnomadjobs.data.provider.READ_WRITE"
+            android:permission="io.github.osaigbovo.remotejobs.data.provider.READ_WRITE"
             android:syncable="true" />
 
         <receiver
