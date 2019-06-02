@@ -34,6 +34,23 @@
     <string name="add_favorites">Add a Job to your favorites list</string>
 
     <!-- Libraries -->
+    <string-array name="library_link">
+        <item>https://github.com/square/retrofit</item>
+        <item>https://github.com/bumptech/glide</item>
+        <item>https://developer.android.com/jetpack/androidx</item>
+        <item>https://github.com/airbnb/lottie-android</item>
+        <item>https://developer.android.com/topic/libraries/architecture/room</item>
+        <item>https://github.com/ReactiveX/RxJava</item>
+        <item>https://github.com/JakeWharton/butterknife</item>
+        <item>https://github.com/google/dagger</item>
+        <item>https://github.com/google/gson</item>
+        <item>https://github.com/facebook/stetho</item>
+        <item>https://github.com/square/leakcanary</item>
+        <item>https://github.com/JakeWharton/timber</item>
+        <item>https://github.com/amulyakhare/TextDrawable</item>
+    </string-array>
+
+    <string name="error">Error</string>
     <string name="about_libraries_card_title">Libraries</string>
     <string name="about_library1_title" translatable="false">Retrofit</string>
     <string name="about_library1_subtitle" translatable="false">Type-safe HTTP client for Android and Java by Square, Inc.</string>
