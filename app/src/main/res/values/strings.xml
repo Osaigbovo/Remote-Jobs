@@ -8,6 +8,10 @@
     <string name="transition_image_name" translatable="false">logo</string>
     <string name="transition_title_name" translatable="false">title</string>
 
+    <!-- Menu-->
+    <string name="about">About</string>
+    <string name="favorite">Favorite</string>
+
     <!-- Jobs -->
     <string name="image_job">Image of a Job</string>
     <string name="company_job">SquareSpace</string>

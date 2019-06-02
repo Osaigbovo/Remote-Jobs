@@ -1,5 +1,6 @@
 package io.github.osaigbovo.remotejobs.utils;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -18,9 +19,10 @@ public class JobsViewModelFactory implements ViewModelProvider.Factory {
         this.creators = creators;
     }
 
+    @NonNull
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends ViewModel> T create(Class<T> modelClass) {
+    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         Provider<? extends ViewModel> creator = creators.get(modelClass);
         if (creator == null) {
             for (Map.Entry<Class<? extends ViewModel>, Provider<ViewModel>> entry : creators.entrySet()) {

@@ -103,7 +103,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void goToURL(String link) {
+    private void goToURL(String link) {
         Uri uri = Uri.parse(link);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         if (intent.resolveActivity(getPackageManager()) != null)

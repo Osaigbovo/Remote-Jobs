@@ -152,7 +152,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_apply)
-    void clickAppy() {
+    void click_Apply() {
         final String jobURL = AppConstants.REMOTEOK_URL + job.getId();
 
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();

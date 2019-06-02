@@ -64,6 +64,7 @@ public class ServiceGenerator {
      * the response is retrieved from cache.
      */
     private static class ResponseCacheInterceptor implements Interceptor {
+        @NonNull
         @Override
         public Response intercept(@NonNull Chain chain) throws IOException {
 
@@ -90,6 +91,7 @@ public class ServiceGenerator {
      * response is fetched from the cache.
      */
     private static class OfflineResponseCacheInterceptor implements Interceptor {
+        @NonNull
         @Override
         public Response intercept(@NonNull Chain chain) throws IOException {
             Request request = chain.request();
@@ -112,6 +114,7 @@ public class ServiceGenerator {
      * Interceptor to display response message
      */
     private static class ErrorHandlerInterceptor implements Interceptor {
+        @NonNull
         @Override
         public Response intercept(@NonNull Chain chain) throws IOException {
             Request request = chain.request();

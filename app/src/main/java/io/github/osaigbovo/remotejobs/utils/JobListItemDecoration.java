@@ -3,12 +3,13 @@ package io.github.osaigbovo.remotejobs.utils;
 import android.graphics.Rect;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
  // Custom item decoration for JobActivity RecyclerView. Adds a
  // small amount of padding to the bottom of grid items.
-public class JobListItemDecoration extends RecyclerView.ItemDecoration {
+ class JobListItemDecoration extends RecyclerView.ItemDecoration {
 
     private int smallPadding;
 
@@ -17,8 +18,8 @@ public class JobListItemDecoration extends RecyclerView.ItemDecoration {
      }
 
      @Override
-     public void getItemOffsets(Rect outRect, View view,
-                                RecyclerView parent, RecyclerView.State state) {
+     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
          outRect.bottom = smallPadding;
      }
 

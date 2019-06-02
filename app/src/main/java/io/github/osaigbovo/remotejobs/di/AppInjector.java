@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -75,7 +76,7 @@ public class AppInjector {
                     .registerFragmentLifecycleCallbacks(
                             new FragmentManager.FragmentLifecycleCallbacks() {
                                 @Override
-                                public void onFragmentCreated(FragmentManager fm, Fragment f,
+                                public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f,
                                                               Bundle savedInstanceState) {
                                     if (f instanceof Injectable) {
                                         AndroidSupportInjection.inject(f);

@@ -28,11 +28,14 @@ public class JobApplication extends MultiDexApplication
         implements HasActivityInjector, HasContentProviderInjector, HasServiceInjector {
 
     private static JobApplication instance;
-    public Context context;
+    private Context context;
 
-    @Inject DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
-    @Inject DispatchingAndroidInjector<ContentProvider> contentProviderInjector;
-    @Inject DispatchingAndroidInjector<Service> dispatchingServiceInjector;
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+    @Inject
+    DispatchingAndroidInjector<ContentProvider> contentProviderInjector;
+    @Inject
+    DispatchingAndroidInjector<Service> dispatchingServiceInjector;
 
     @Override
     public void onCreate() {
@@ -72,7 +75,7 @@ public class JobApplication extends MultiDexApplication
         return instance.checkIfHasNetwork();
     }
 
-    public boolean checkIfHasNetwork() {
+    private boolean checkIfHasNetwork() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = Objects.requireNonNull(cm).getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();

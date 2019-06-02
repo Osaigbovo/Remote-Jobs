@@ -24,7 +24,7 @@ import timber.log.Timber;
 
 public class JobsProvider extends ContentProvider {
 
-    public static final String AUTHORITY = "io.github.osaigbovo.remotejobs.data.provider";
+    private static final String AUTHORITY = "io.github.osaigbovo.remotejobs.data.provider";
     public static final Uri URI_JOB = Uri.parse("content://" + AUTHORITY + "/" + "favorite_jobs");
     private static final String TAG = JobsProvider.class.getSimpleName();
     private static final int FAVORITE_JOB_DIR = 1;

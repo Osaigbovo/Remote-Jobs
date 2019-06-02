@@ -46,7 +46,7 @@ public class JobRepository {
     private final JobDao jobDao;
     private final FavoriteDao favoriteDao;
     private final ContentResolver contentResolver;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     public JobRepository(JobDao jobDao, FavoriteDao favoriteDao, RequestInterface requestInterface,
@@ -59,54 +59,50 @@ public class JobRepository {
     }
 
     public Flowable<Resource<List<Job>>> retrieveJobs() {
+        return Flowable.create(emitter -> new NetworkBoundSource<List<Job>, List<Job>>(emitter) {
+            @Override
+            public Observable<List<Job>> getRemote() {
+                Timber.e("Getting data from Remote.....");
 
+                /*compositeDisposable.add(requestInterface.getAllJobs()
+                        .subscribe(t -> mJobsBehaviorSubject.onNext(t)));*/
 
-        return Flowable.create(emitter -> {
-            new NetworkBoundSource<List<Job>, List<Job>>(emitter) {
-                @Override
-                public Observable<List<Job>> getRemote() {
-                    Timber.e("Getting data from Remote.....");
+                Observable<List<Job>> listObservable = requestInterface
+                        .getAllJobs()
+                        .flatMap(Observable::fromIterable)
+                        .filter(job -> !TextUtils.isEmpty(job.getCompany()))
+                        .toList()
+                        .toObservable();
 
-                    /*compositeDisposable.add(requestInterface.getAllJobs()
-                            .subscribe(t -> mJobsBehaviorSubject.onNext(t)));*/
+                return Observable
+                        .combineLatest(/*mJobsBehaviorSubject.hide()*/listObservable, savedJobIds(),
+                                (jobList, favoriteIds) -> {
+                                    for (Job job : jobList) {
+                                        job.setFavorite(favoriteIds.contains(job.getId()));
+                                    }
+                                    Timber.e(String.valueOf(favoriteIds.size()));
+                                    Timber.e(String.valueOf(jobList.size()));
+                                    return jobList;
+                                })
+                        .doOnError(Timber::e);
+            }
 
-                    Observable<List<Job>> listObservable = requestInterface
-                            .getAllJobs()
-                            .flatMap(Observable::fromIterable)
-                            .filter(job -> !TextUtils.isEmpty(job.getCompany()))
-                            .toList()
-                            .toObservable();
+            @Override
+            public Flowable<List<Job>> getLocal() {
+                Timber.e("Getting data from database.....");
+                return jobDao.getJobs();
+            }
 
-                    return Observable
-                            .combineLatest(/*mJobsBehaviorSubject.hide()*/listObservable, savedJobIds(),
-                                    (jobList, favoriteIds) -> {
-                                        for (Job job : jobList) {
-                                            job.setFavorite(favoriteIds.contains(job.getId()));
-                                        }
-                                        Timber.e(String.valueOf(favoriteIds.size()));
-                                        Timber.e(String.valueOf(jobList.size()));
-                                        return jobList;
-                                    })
-                            .doOnError(Timber::e);
-                }
+            @Override
+            public void saveCallResult(@NonNull List<Job> jobList) {
+                jobDao.saveJobs(jobList);
+                Timber.e("Save to database.....");
+            }
 
-                @Override
-                public Flowable<List<Job>> getLocal() {
-                    Timber.e("Getting data from database.....");
-                    return jobDao.getJobs();
-                }
-
-                @Override
-                public void saveCallResult(@NonNull List<Job> jobList) {
-                    jobDao.saveJobs(jobList);
-                    Timber.e("Save to database.....");
-                }
-
-                @Override
-                public Function<List<Job>, List<Job>> mapper() {
-                    return jobList -> jobList;
-                }
-            };
+            @Override
+            public Function<List<Job>, List<Job>> mapper() {
+                return jobList -> jobList;
+            }
         }, BackpressureStrategy.BUFFER);
     }
 
@@ -118,27 +114,12 @@ public class JobRepository {
                 .subscribeOn(Schedulers.io());
     }
 
-    private Observable<Set<Integer>> getSavedMovieIds() {
-        if (mSavedJobIdsSubject == null) {
-            //mSavedJobIdsSubject = BehaviorSubject.createDefault();
-            mSavedJobIdsSubject = BehaviorSubject.create();
-            savedJobIds().filter(integers -> (integers != null))
-                    .subscribe(mSavedJobIdsSubject);
-
-        }
-        return mSavedJobIdsSubject.hide();
-    }
-
     public Observable<List<FavoriteJob>> getFavoriteListForWidget() {
         return Observable
                 .just(new Optional<>(contentResolver.query(JobsProvider.URI_JOB, FAVORITE_WIDGET_PROJECTION,
                         null, null, "date")))
                 .map(WIDGET_PROJECTION_MAP)
                 .subscribeOn(Schedulers.io());
-    }
-
-    public LiveData<List<FavoriteJob>> getFavoritess() {
-        return favoriteDao.getFavoriteJobss();
     }
 
     public Flowable<List<FavoriteJob>> getFavorites() {

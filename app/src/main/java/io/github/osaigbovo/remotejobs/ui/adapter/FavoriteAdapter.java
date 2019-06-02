@@ -26,6 +26,7 @@ import static io.github.osaigbovo.remotejobs.utils.ViewUtil.getDrawableLogo;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteViewHolder> {
 
+    @SuppressWarnings("unchecked")
     private final AsyncListDiffer<FavoriteJob> mDiffer = new AsyncListDiffer(this, DIFF_CALLBACK);
     private final Context context;
     private final OnFavoriteJobClickListener onFavoriteJobClickListener;

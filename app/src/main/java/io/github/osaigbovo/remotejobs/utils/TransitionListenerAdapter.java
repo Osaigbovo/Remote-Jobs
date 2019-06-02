@@ -3,7 +3,7 @@ package io.github.osaigbovo.remotejobs.utils;
 import androidx.annotation.NonNull;
 import androidx.transition.Transition;
 
-public class TransitionListenerAdapter implements Transition.TransitionListener {
+class TransitionListenerAdapter implements Transition.TransitionListener {
     @Override
     public void onTransitionStart(@NonNull final Transition transition) {
 

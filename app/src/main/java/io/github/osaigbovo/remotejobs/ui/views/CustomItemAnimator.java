@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * */
 public class CustomItemAnimator extends DefaultItemAnimator {
 
-    public static final Interpolator COLLAPSE_INTERPOLATOR = new AccelerateInterpolator(3f);
-    public static final int COLLAPSE_ANIM_DURATION = 600;
+    private static final Interpolator COLLAPSE_INTERPOLATOR = new AccelerateInterpolator(3f);
+    private static final int COLLAPSE_ANIM_DURATION = 600;
 
     private onAnimationEndListener animationEndListener;
 

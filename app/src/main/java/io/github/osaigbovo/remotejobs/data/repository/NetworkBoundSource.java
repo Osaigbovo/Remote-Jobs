@@ -7,13 +7,12 @@ import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public abstract class NetworkBoundSource<LocalType, RemoteType> {
+abstract class NetworkBoundSource<LocalType, RemoteType> {
 
     @SuppressLint("CheckResult")
     NetworkBoundSource(FlowableEmitter<Resource<LocalType>> emitter) {
@@ -25,26 +24,23 @@ public abstract class NetworkBoundSource<LocalType, RemoteType> {
         getRemote().map(mapper())
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
-                .subscribe(new Consumer<LocalType>() {
-                    @Override
-                    public void accept(LocalType localTypeData) throws Exception {
-                        firstDataDisposable.dispose();
-                        NetworkBoundSource.this.saveCallResult(localTypeData);
-                        NetworkBoundSource.this.getLocal()
-                                .map(Resource::success)
-                                .onErrorReturn(msg -> Resource.error(msg.getMessage()))
-                                .subscribe(emitter::onNext);
+                .subscribe(localTypeData -> {
+                    firstDataDisposable.dispose();
+                    NetworkBoundSource.this.saveCallResult(localTypeData);
+                    NetworkBoundSource.this.getLocal()
+                            .map(Resource::success)
+                            .onErrorReturn(msg -> Resource.error(msg.getMessage()))
+                            .subscribe(emitter::onNext);
 
-                    }
                 }, Timber::e);
     }
 
-    public abstract Observable<RemoteType> getRemote();
+    protected abstract Observable<RemoteType> getRemote();
 
-    public abstract Flowable<LocalType> getLocal();
+    protected abstract Flowable<LocalType> getLocal();
 
-    public abstract void saveCallResult(LocalType data);
+    protected abstract void saveCallResult(LocalType data);
 
-    public abstract Function<RemoteType, LocalType> mapper();
+    protected abstract Function<RemoteType, LocalType> mapper();
 
 }

@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 @Entity(tableName = "remote_jobs",
-        indices = {@Index(value = {"date"}, unique = false)})
+        indices = {@Index(value = {"date"})})
 public class Job implements Parcelable {
 
     @PrimaryKey

@@ -49,8 +49,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
 
     private static FirebaseAnalytics firebaseAnalytics;
 
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    @Inject ViewModelProvider.Factory viewModelFactory;
     private JobViewModel jobViewModel;
 
     @BindView(R.id.swipeRefreshLayout)
@@ -124,7 +123,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.dnj_toolbar_menu, menu);
+        inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 

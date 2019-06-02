@@ -8,12 +8,11 @@ import android.view.View;
  * */
 public class LayoutParamHeightAnimator extends ValueAnimator {
 
-    public LayoutParamHeightAnimator(final View target, int... values) {
+    private LayoutParamHeightAnimator(final View target, int... values) {
         setIntValues(values);
 
         addUpdateListener(valueAnimator -> {
-            int value = (int) valueAnimator.getAnimatedValue();
-            target.getLayoutParams().height = value;
+            target.getLayoutParams().height = (int) valueAnimator.getAnimatedValue();
             target.requestLayout();
         });
     }

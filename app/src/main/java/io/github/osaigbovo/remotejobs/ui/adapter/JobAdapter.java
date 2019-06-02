@@ -27,6 +27,7 @@ import static io.github.osaigbovo.remotejobs.utils.ViewUtil.getDrawableLogo;
 
 public class JobAdapter extends RecyclerView.Adapter<JobViewHolder> {
 
+    @SuppressWarnings("unchecked")
     private final AsyncListDiffer<Job> mDiffer = new AsyncListDiffer(this, DIFF_CALLBACK);
     private final OnJobClickListener onJobClickListener;
     private final Context context;

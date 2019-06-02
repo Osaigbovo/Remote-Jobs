@@ -31,7 +31,7 @@
     <!-- Widget -->
     <dimen name="widget_elevation">4dp</dimen>
     <dimen name="widget_header_height">56dp</dimen>
-    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_margin">0dp</dimen>
     <dimen name="marginStart_widget_list_title">24dp</dimen>
     <dimen name="widget_list_divider_height">0.5dp</dimen>
 

@@ -29,7 +29,8 @@ import static io.github.osaigbovo.remotejobs.ui.jobdetail.DetailActivity.ARG_DET
 public class FavoriteActivity extends AppCompatActivity implements HasSupportFragmentInjector,
         FavoriteAdapter.OnFavoriteJobClickListener {
 
-    @Inject DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
     @BindView(R.id.favorite_toolbar) Toolbar toolbar;
 
     private FavoriteFragment favoriteFragment;
@@ -67,6 +68,7 @@ public class FavoriteActivity extends AppCompatActivity implements HasSupportFra
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onJobClick(FavoriteJob favoriteJob, ImageView imageView, TextView textView) {
         Intent intent = new Intent(this, DetailActivity.class);

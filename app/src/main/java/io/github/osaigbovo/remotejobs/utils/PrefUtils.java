@@ -10,16 +10,16 @@ import java.util.Set;
 /**
  * Utilities and constants related to app preferences.
  */
-public final class PrefUtils {
+final class PrefUtils {
 
     /**
      * Boolean indicating whether we performed the (one-time) welcome flow.
      */
     public static final String PREF_WELCOME_DONE = "pref_welcome_done";
 
-    public static final String PREF_FAVORED_MOVIES = "pref_favored_movies";
+    private static final String PREF_FAVORED_MOVIES = "pref_favored_movies";
 
-    public static final String PREF_BROWSE_MOVIES_MODE = "pref_browse_movies_mode";
+    private static final String PREF_BROWSE_MOVIES_MODE = "pref_browse_movies_mode";
 
     public static final String PREF_INCLUDE_ADULT = "pref_include_adult";
 

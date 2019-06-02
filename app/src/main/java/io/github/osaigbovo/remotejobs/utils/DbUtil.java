@@ -19,7 +19,7 @@ import static io.github.osaigbovo.remotejobs.widget.FavoriteJobsAppWidget.FAVORI
 public final class DbUtil {
 
     public static final int BOOLEAN_FALSE = 0;
-    public static final int BOOLEAN_TRUE = 1;
+    private static final int BOOLEAN_TRUE = 1;
 
     public static FavoriteJob getFavorite(Job job, boolean favorite) {
         return new FavoriteJob(job.getId(),
@@ -32,7 +32,7 @@ public final class DbUtil {
                 favorite);
     }
 
-    public static String getString(Cursor cursor, String columnName) {
+    private static String getString(Cursor cursor, String columnName) {
         return cursor.getString(cursor.getColumnIndexOrThrow(columnName));
     }
 
@@ -40,11 +40,11 @@ public final class DbUtil {
         return getInt(cursor, columnName) == BOOLEAN_TRUE;
     }
 
-    public static long getLong(Cursor cursor, String columnName) {
-        return cursor.getLong(cursor.getColumnIndexOrThrow(columnName));
+    private static long getLong(Cursor cursor) {
+        return cursor.getLong(cursor.getColumnIndexOrThrow("date"));
     }
 
-    public static int getInt(Cursor cursor, String columnName) {
+    private static int getInt(Cursor cursor, String columnName) {
         return cursor.getInt(cursor.getColumnIndexOrThrow(columnName));
     }
 
@@ -52,11 +52,11 @@ public final class DbUtil {
         return cursor.getDouble(cursor.getColumnIndexOrThrow(columnName));
     }
 
-    public static String[] ID_PROJECTION = {
+    public static final String[] ID_PROJECTION = {
             "id"
     };
 
-    public static String[] FAVORITE_WIDGET_PROJECTION = {
+    public static final String[] FAVORITE_WIDGET_PROJECTION = {
             "id",
             "position",
             "company",
@@ -66,7 +66,7 @@ public final class DbUtil {
             "description"
     };
 
-    public static Function<Optional<Cursor>, Set<Integer>> ID_PROJECTION_MAP = cursorOptional -> {
+    public static final Function<Optional<Cursor>, Set<Integer>> ID_PROJECTION_MAP = cursorOptional -> {
         try (Cursor cursor = cursorOptional.get()) {
             Set<Integer> idSet = new HashSet<>(cursor.getCount());
             while (cursor.moveToNext()) {
@@ -76,7 +76,7 @@ public final class DbUtil {
         }
     };
 
-    public static Function<Optional<Cursor>, List<FavoriteJob>> WIDGET_PROJECTION_MAP = cursorOptional -> {
+    public static final Function<Optional<Cursor>, List<FavoriteJob>> WIDGET_PROJECTION_MAP = cursorOptional -> {
         try (Cursor cursor = cursorOptional.get()) {
             List<FavoriteJob> favoriteJobs = new ArrayList<>(cursor.getCount());
             while (cursor.moveToNext()) {
@@ -84,7 +84,7 @@ public final class DbUtil {
                 String position = getString(cursor, "position");
                 String company = getString(cursor, "company");
                 String company_logo = getString(cursor, "company_logo");
-                long date = getLong(cursor, "date");
+                long date = getLong(cursor);
                 String logo = getString(cursor, "logo");
                 String description = getString(cursor, "description");
 

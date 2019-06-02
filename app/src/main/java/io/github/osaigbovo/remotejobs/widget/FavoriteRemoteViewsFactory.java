@@ -26,17 +26,16 @@ import static io.github.osaigbovo.remotejobs.ui.jobdetail.DetailActivity.ARG_DET
 import static io.github.osaigbovo.remotejobs.utils.ViewUtil.drawableToBitmap;
 import static io.github.osaigbovo.remotejobs.utils.ViewUtil.getDrawableLogo;
 
-public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private JobRepository jobRepository;
     private List<FavoriteJob> favoriteJobs;
     private CompositeDisposable compositeDisposable;
     private Context mContext;
-    private final int mAppWidgetId;
 
     FavoriteRemoteViewsFactory(Context context, Intent intent, JobRepository jobRepository) {
         mContext = context;
-        mAppWidgetId = intent
+        int mAppWidgetId = intent
                 .getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         this.jobRepository = jobRepository;
     }
@@ -100,7 +99,7 @@ public class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteView
             }
 
         } catch (Exception e) {
-            e.toString();
+            Timber.e(e);
         }
 
         Bundle extras = new Bundle();

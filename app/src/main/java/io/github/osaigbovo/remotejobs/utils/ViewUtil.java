@@ -3,11 +3,8 @@ package io.github.osaigbovo.remotejobs.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Outline;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.ViewOutlineProvider;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -95,13 +92,4 @@ public class ViewUtil {
         return bitmap;
     }
 
-    public static final ViewOutlineProvider CIRCULAR_OUTLINE = new ViewOutlineProvider() {
-        @Override
-        public void getOutline(View view, Outline outline) {
-            outline.setOval(view.getPaddingLeft(),
-                    view.getPaddingTop(),
-                    view.getWidth() - view.getPaddingRight(),
-                    view.getHeight() - view.getPaddingBottom());
-        }
-    };
 }

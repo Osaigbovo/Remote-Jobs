@@ -47,7 +47,8 @@ import static io.github.osaigbovo.remotejobs.utils.ViewUtil.convertDrawableToBit
 
 public class FavoriteFragment extends Fragment implements Injectable {
 
-    @Inject ViewModelProvider.Factory viewModelFactory;
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
     @BindView(R.id.favorite_container) ConstraintLayout constraintLayout;
     @BindView(R.id.recycler_favorites_list) RecyclerView favoriteRecyclerView;
     @BindView(R.id.item_favorite_state) View noFavorites;
