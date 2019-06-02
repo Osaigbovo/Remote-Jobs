@@ -28,10 +28,10 @@ import static io.github.osaigbovo.remotejobs.utils.ViewUtil.getDrawableLogo;
 
 class FavoriteRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private JobRepository jobRepository;
+    private final JobRepository jobRepository;
     private List<FavoriteJob> favoriteJobs;
     private CompositeDisposable compositeDisposable;
-    private Context mContext;
+    private final Context mContext;
 
     FavoriteRemoteViewsFactory(Context context, Intent intent, JobRepository jobRepository) {
         mContext = context;

@@ -15,8 +15,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FavoriteViewModel extends ViewModel {
 
-    private JobRepository jobRepository;
-    LiveData<List<FavoriteJob>> favoriteJobLiveData;
+    private final JobRepository jobRepository;
+    final LiveData<List<FavoriteJob>> favoriteJobLiveData;
 
     @Inject
     FavoriteViewModel(JobRepository jobRepository) {

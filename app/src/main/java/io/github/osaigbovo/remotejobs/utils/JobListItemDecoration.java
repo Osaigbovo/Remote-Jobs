@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
  // small amount of padding to the bottom of grid items.
  class JobListItemDecoration extends RecyclerView.ItemDecoration {
 
-    private int smallPadding;
+    private final int smallPadding;
 
      public JobListItemDecoration(int smallPadding) {
          this.smallPadding = smallPadding;

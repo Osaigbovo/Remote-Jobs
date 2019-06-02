@@ -31,17 +31,17 @@ public class ServiceGenerator {
     private static int cacheSize = 30 * 1024 * 1024; // 10 MB
     private static Cache cache = new Cache(httpCacheDirectory, cacheSize);*/
 
-    private static Retrofit.Builder builder = new Retrofit.Builder()
+    private static final Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit retrofit = builder.build();
 
-    private static HttpLoggingInterceptor logging = new HttpLoggingInterceptor()
+    private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+    private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .addNetworkInterceptor(new ResponseCacheInterceptor())
             .addInterceptor(new OfflineResponseCacheInterceptor())
             .addInterceptor(new ErrorHandlerInterceptor())
