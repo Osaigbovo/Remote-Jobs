@@ -1,6 +1,7 @@
 package io.github.osaigbovo.remotejobs.ui.jobs;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +33,7 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
@@ -49,7 +51,8 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
 
     private static FirebaseAnalytics firebaseAnalytics;
 
-    @Inject ViewModelProvider.Factory viewModelFactory;
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
     private JobViewModel jobViewModel;
 
     @BindView(R.id.swipeRefreshLayout)
@@ -60,6 +63,8 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
     ProgressBar progressBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindDrawable(R.mipmap.ic_launcher)
+    Drawable logo;
 
     private JobAdapter mAdapter;
 
@@ -72,6 +77,11 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(logo);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
 
         jobViewModel = ViewModelProviders
                 .of(this, viewModelFactory)
@@ -92,15 +102,16 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
         mAdapter = new JobAdapter(this, this);
         jobViewModel.jobsLiveData.observe(this, resource -> {
             if (resource.data != null) {
-                a(resource.data);
+                setFirebaseAnalytics(resource.data);
                 progressBar.setVisibility(View.GONE);
                 mAdapter.submitList(resource.data);
             }
         });
+        initSwipeToRefresh();
         mainRecyclerView.setAdapter(mAdapter);
     }
 
-    private void a(List<Job> jobList) {
+    private void setFirebaseAnalytics(List<Job> jobList) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(FirebaseAnalytics.Param.ITEM_LIST, new ArrayList<>(jobList));
         bundle.putString(FirebaseAnalytics.Param.QUANTITY, String.valueOf(jobList.size()));
@@ -108,16 +119,13 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
     }
 
     private void initSwipeToRefresh() {
-        /*moviesListViewModel.getRefreshState().observe(this, networkState -> {
-            mSwipeRefreshLayout.setRefreshing(networkState == NetworkState.LOADING);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            jobViewModel.refresh();
+            if (swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
         });
-        mSwipeRefreshLayout.setOnRefreshListener(() -> moviesListViewModel.refresh());*/
-        // Scheme colors for animation
-        swipeRefreshLayout.setColorSchemeColors(
-                getResources().getColor(android.R.color.holo_green_light),
-                getResources().getColor(android.R.color.holo_orange_light),
-                getResources().getColor(android.R.color.holo_red_light)
-        );
     }
 
     @Override
@@ -152,7 +160,6 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.OnJobCl
                 this,
                 new Pair<>(imageView, getResources().getString(R.string.transition_image_name)),
                 new Pair<>(textView, getResources().getString(R.string.transition_title_name)));
-
         ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
     }
 

@@ -38,6 +38,7 @@
     <string name="add_favorites">Add a Job to your favorites list</string>
 
     <!-- Libraries -->
+    <string name="open_source">Open Source Licenses</string>
     <string-array name="library_link">
         <item>https://github.com/square/retrofit</item>
         <item>https://github.com/bumptech/glide</item>

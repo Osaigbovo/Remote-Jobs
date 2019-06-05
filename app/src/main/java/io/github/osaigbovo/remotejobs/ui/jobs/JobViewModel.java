@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 public class JobViewModel extends ViewModel {
 
     private final JobRepository jobRepository;
-    final LiveData<Resource<List<Job>>> jobsLiveData;
+    LiveData<Resource<List<Job>>> jobsLiveData;
 
     @Inject
     JobViewModel(JobRepository jobRepository) {
@@ -39,6 +39,10 @@ public class JobViewModel extends ViewModel {
         } else {
             jobRepository.removeFavorite(favoriteJob);
         }
+    }
+
+    void refresh(){
+        jobRepository.getFreshJobs();
     }
 
     @Override

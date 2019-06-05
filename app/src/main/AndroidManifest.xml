@@ -8,7 +8,7 @@
     <permission android:name="io.github.osaigbovo.remotejobs.data.provider.READ_WRITE" />
 
     <application
-        android:name="io.github.osaigbovo.remotejobs.JobApplication"
+        android:name=".JobApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -17,9 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
-            android:name="io.github.osaigbovo.remotejobs.ui.jobs.JobActivity"
+            android:name=".ui.jobs.JobActivity"
             android:theme="@style/AppTheme.Job">
             <meta-data
                 android:name="android.app.searchable"
@@ -30,13 +29,17 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name="io.github.osaigbovo.remotejobs.ui.about.AboutActivity"
-            android:parentActivityName="io.github.osaigbovo.remotejobs.ui.jobs.JobActivity"
+            android:name=".ui.about.AboutActivity"
+            android:label="@string/open_source"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".ui.jobs.JobActivity"
             android:theme="@style/AppTheme.About">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -44,9 +47,9 @@
         </activity>
 
         <activity
-            android:name="io.github.osaigbovo.remotejobs.ui.favorite.FavoriteActivity"
+            android:name=".ui.favorite.FavoriteActivity"
             android:label="@string/favorite_jobs"
-            android:parentActivityName="io.github.osaigbovo.remotejobs.ui.jobs.JobActivity"
+            android:parentActivityName=".ui.jobs.JobActivity"
             android:theme="@style/AppTheme.Favorite">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -54,9 +57,9 @@
         </activity>
 
         <activity
-            android:name="io.github.osaigbovo.remotejobs.ui.jobdetail.DetailActivity"
+            android:name=".ui.jobdetail.DetailActivity"
             android:label="@string/detail_jobs"
-            android:parentActivityName="io.github.osaigbovo.remotejobs.ui.jobs.JobActivity"
+            android:parentActivityName=".ui.jobs.JobActivity"
             android:theme="@style/AppTheme.JobDetail">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,24 +71,29 @@
             android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:name="io.github.osaigbovo.remotejobs.data.provider.JobsProvider"
+            android:name=".data.provider.JobsProvider"
             android:authorities="@string/content_authority"
             android:exported="true"
             android:permission="io.github.osaigbovo.remotejobs.data.provider.READ_WRITE"
             android:syncable="true" />
 
-        <receiver android:name="io.github.osaigbovo.remotejobs.widget.FavoriteJobsAppWidget">
+        <receiver android:name=".widget.FavoriteJobsAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/favorite_jobs_app_widget_info" />
         </receiver>
 
         <service
-            android:name="io.github.osaigbovo.remotejobs.widget.FavoriteJobWidgetService"
+            android:name=".widget.FavoriteJobWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".data.remote.FetchJobsIntentService"
+            android:exported="false" />
 
     </application>
 

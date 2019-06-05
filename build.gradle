@@ -10,10 +10,8 @@ buildscript {
             'dagger'          : '2.21',
             'glide'           : '4.9.0',
             'gson'            : '2.8.5',
-            'instabug'        : '8.0.7',
-            'leakcanary'      : '1.6.3',
             'lifecycle'       : '2.0.0',
-            'paging'          : '2.1.0',
+            'lottie'          : '3.0.2',
             'okhttp'          : '3.14.1',
             'retrofit'        : '2.5.0',
             'room'            : '2.0.0',
@@ -21,7 +19,7 @@ buildscript {
             'rxjava'          : '2.2.8',
             'stetho'          : '1.5.1',
             'timber'          : '4.7.1',
-            'workmanager'     : '2.0.1'
+            'textdrawable'    : '1.0.1'
     ]
     
     repositories {

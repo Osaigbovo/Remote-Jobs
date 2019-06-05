@@ -1,10 +1,10 @@
 package io.github.osaigbovo.remotejobs.data.repository;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 
 import java.util.List;
 import java.util.Set;
@@ -17,6 +17,7 @@ import io.github.osaigbovo.remotejobs.data.local.dao.JobDao;
 import io.github.osaigbovo.remotejobs.data.local.entity.FavoriteJob;
 import io.github.osaigbovo.remotejobs.data.model.Job;
 import io.github.osaigbovo.remotejobs.data.provider.JobsProvider;
+import io.github.osaigbovo.remotejobs.data.remote.FetchJobsIntentService;
 import io.github.osaigbovo.remotejobs.data.remote.RequestInterface;
 import io.github.osaigbovo.remotejobs.utils.Optional;
 import io.github.osaigbovo.remotejobs.utils.Resource;
@@ -27,7 +28,6 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
 import static io.github.osaigbovo.remotejobs.utils.DbUtil.FAVORITE_WIDGET_PROJECTION;
@@ -38,24 +38,21 @@ import static io.github.osaigbovo.remotejobs.utils.DbUtil.WIDGET_PROJECTION_MAP;
 @Singleton
 public class JobRepository {
 
-    private BehaviorSubject<Set<Integer>> mSavedJobIdsSubject;
-    //private PublishSubject<FavoriteJob> favoriteJobPublishSubject = PublishSubject.create();
-    private BehaviorSubject<List<Job>> mJobsBehaviorSubject = BehaviorSubject.create();
-
     private final RequestInterface requestInterface;
     private final JobDao jobDao;
     private final FavoriteDao favoriteDao;
     private final ContentResolver contentResolver;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private Context context;
 
     @Inject
     public JobRepository(JobDao jobDao, FavoriteDao favoriteDao, RequestInterface requestInterface,
-                         ContentResolver contentResolver) {
+                         ContentResolver contentResolver, Context context) {
         this.requestInterface = requestInterface;
         this.jobDao = jobDao;
         this.favoriteDao = favoriteDao;
         this.contentResolver = contentResolver;
-
+        this.context = context;
     }
 
     public Flowable<Resource<List<Job>>> retrieveJobs() {
@@ -63,10 +60,6 @@ public class JobRepository {
             @Override
             public Observable<List<Job>> getRemote() {
                 Timber.e("Getting data from Remote.....");
-
-                /*compositeDisposable.add(requestInterface.getAllJobs()
-                        .subscribe(t -> mJobsBehaviorSubject.onNext(t)));*/
-
                 Observable<List<Job>> listObservable = requestInterface
                         .getAllJobs()
                         .flatMap(Observable::fromIterable)
@@ -75,7 +68,7 @@ public class JobRepository {
                         .toObservable();
 
                 return Observable
-                        .combineLatest(/*mJobsBehaviorSubject.hide()*/listObservable, savedJobIds(),
+                        .combineLatest(listObservable, savedJobIds(),
                                 (jobList, favoriteIds) -> {
                                     for (Job job : jobList) {
                                         job.setFavorite(favoriteIds.contains(job.getId()));
@@ -106,6 +99,10 @@ public class JobRepository {
         }, BackpressureStrategy.BUFFER);
     }
 
+    public void getFreshJobs() {
+        FetchJobsIntentService.startActionGetRemoteJobs(context);
+    }
+
     private Observable<Set<Integer>> savedJobIds() {
         return Observable
                 .just(new Optional<>(contentResolver.query(JobsProvider.URI_JOB, ID_PROJECTION,
@@ -126,32 +123,20 @@ public class JobRepository {
         return favoriteDao.getFavoriteJobs();
     }
 
-    public LiveData<FavoriteJob> isFavorite(int id) {
-        return favoriteDao.isFavoriteJob(id);
-    }
-
-    public LiveData<FavoriteJob> getFavorite(int id) {
-        return favoriteDao.getFavoriteJob(id);
-    }
-
     public void addFavorite(FavoriteJob favoriteJob) {
-
         compositeDisposable.add(Completable.fromAction(() -> {
             jobDao.update(favoriteJob.getId(), favoriteJob.isFavorite());
             favoriteDao.saveFavoriteJob(favoriteJob);
         })
-                //.doOnComplete(() -> favoriteJobPublishSubject.onNext(favoriteJob))
                 .subscribeOn(Schedulers.io())
                 .subscribe(() -> Timber.e("Adding %s to database", favoriteJob.getPosition())));
     }
 
     public void removeFavorite(FavoriteJob favoriteJob) {
-
         compositeDisposable.add(Completable.fromAction(() -> {
             jobDao.update(favoriteJob.getId(), favoriteJob.isFavorite());
             favoriteDao.deleteFavoriteJob(favoriteJob);
         })
-                //.doOnComplete(() -> favoriteJobPublishSubject.onNext(favoriteJob))
                 .subscribeOn(Schedulers.io())
                 .subscribe(() -> Timber.e("Removing %s to database", favoriteJob.getPosition())));
     }

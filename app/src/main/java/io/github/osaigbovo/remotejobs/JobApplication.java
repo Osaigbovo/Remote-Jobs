@@ -10,7 +10,6 @@ import android.net.NetworkInfo;
 import androidx.multidex.MultiDexApplication;
 
 import com.facebook.stetho.Stetho;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.util.Objects;
 
@@ -30,26 +29,16 @@ public class JobApplication extends MultiDexApplication
     private static JobApplication instance;
     private Context context;
 
-    @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
-    @Inject
-    DispatchingAndroidInjector<ContentProvider> contentProviderInjector;
-    @Inject
-    DispatchingAndroidInjector<Service> dispatchingServiceInjector;
+    @Inject DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+    @Inject DispatchingAndroidInjector<ContentProvider> contentProviderInjector;
+    @Inject DispatchingAndroidInjector<Service> dispatchingServiceInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
-
         // Stetho init code
         Stetho.initializeWithDefaults(this);
-
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
