@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3cec77</color>
-    <color name="colorPrimaryDark">#3cec77</color>
-    <color name="colorAccent">#3cec77</color>
+    <color name="colorPrimaryDark">#04AD75</color>
+    <color name="colorPrimary">#05E394</color>
+    <color name="colorAccent">#2637B9</color>
 
     <color name="textColorChips">#ffffff</color>
 
@@ -21,7 +21,5 @@
     <color name="dividerColor">#B6B6B6</color>
     <color name="window_background">#FFF5F5F5</color>
     <color name="grey_ripple">#8ddd</color>
-
-
 
 </resources>

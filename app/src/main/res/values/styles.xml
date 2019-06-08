@@ -2,28 +2,22 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
         <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
-
         <item name="android:windowContentTransitions">true</item>
-
     </style>
 
     <style name="AppTheme.Job">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
         <item name="android:windowSharedElementExitTransition">@transition/detail_transition</item>
     </style>
 
     <style name="AppTheme.JobDetail">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
         <item name="android:windowSharedElementEnterTransition">@transition/detail_transition</item>
     </style>
 
@@ -53,6 +47,8 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
+
+    <!-- Job -->
     <style name="JobImage">
         <item name="android:scaleType">fitCenter</item>
         <item name="android:background">@drawable/image_border</item>
@@ -93,10 +89,10 @@
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:textSize">@dimen/text_16</item>
+        <item name="android:textSize">@dimen/text_16</item><!-- Details Button -->
     </style>
 
-    <!-- Details Button -->
+
     <style name="JobButton" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_margin">@dimen/margin_16</item>
         <item name="backgroundTint">@color/colorAccent</item>
@@ -109,6 +105,8 @@
         <item name="cornerRadius">50dp</item>
     </style>
 
+
+
     <!-- Widget -->
     <style name="WidgetTitleTextStyle">
         <item name="android:textSize">20sp</item>
@@ -116,27 +114,42 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="StockSymbolTextStyle">
+    <style name="WidgetJobPosition">
         <item name="android:textColor">@color/textPrimary</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">@dimen/text_16</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginStart">@dimen/margin_8</item>
+        <item name="android:layout_marginEnd">@dimen/margin_8</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:layout_toEndOf">@id/widget_company_logo</item>
     </style>
 
-    <style name="CompanyNameTextStyle">
-        <item name="android:textColor">@color/textSecondary</item>
+    <style name="WidgetJobCompanyName">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/text_12</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginStart">@dimen/margin_8</item>
+        <item name="android:layout_marginEnd">@dimen/margin_8</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+        <item name="android:layout_marginBottom">@dimen/margin_8</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:layout_toEndOf">@id/widget_company_logo</item>
+        <item name="android:layout_below">@id/widget_position</item>
     </style>
 
-    <style name="BidPriceTextStyle">
-        <item name="android:textColor">@color/textSecondary</item>
-        <item name="android:textSize">20sp</item>
-    </style>
 
-    <style name="PercentChangeTextStyle">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/textAndIcons</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 
+    <!-- Open Source -->
     <style name="about_entry">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

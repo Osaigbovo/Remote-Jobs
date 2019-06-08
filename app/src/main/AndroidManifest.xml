@@ -19,6 +19,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.jobs.JobActivity"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.Job">
             <meta-data
                 android:name="android.app.searchable"

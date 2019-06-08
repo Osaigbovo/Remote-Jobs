@@ -10,6 +10,7 @@ import android.transition.TransitionListenerAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
@@ -71,14 +72,23 @@ public class DetailActivity extends AppCompatActivity {
             });
         }
 
-        Intent intent = getIntent();
-        if (intent.hasExtra(ARG_DETAIL_JOB)) {
-            if (Objects.requireNonNull(intent.getExtras()).getParcelable(ARG_DETAIL_JOB) instanceof Job) {
-                this.job = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
-            } else if (intent.getExtras().getParcelable(ARG_DETAIL_JOB) instanceof FavoriteJob) {
-                this.favoriteJob = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
+        if (savedInstanceState == null) {
+            Intent intent = getIntent();
+            if (intent.hasExtra(ARG_DETAIL_JOB)) {
+                if (Objects.requireNonNull(intent.getExtras()).getParcelable(ARG_DETAIL_JOB) instanceof Job) {
+                    this.job = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
+                } else if (intent.getExtras().getParcelable(ARG_DETAIL_JOB) instanceof FavoriteJob) {
+                    this.favoriteJob = intent.getExtras().getParcelable(ARG_DETAIL_JOB);
+                }
+            }
+        } else {
+            if (savedInstanceState.getParcelable(ARG_DETAIL_JOB) instanceof Job) {
+                this.job = savedInstanceState.getParcelable(ARG_DETAIL_JOB);
+            } else {
+                this.favoriteJob = savedInstanceState.getParcelable(ARG_DETAIL_JOB);
             }
         }
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             final Transition sharedElementEnterTransition =
@@ -106,11 +116,21 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 });
             }
-        } else{
+        } else {
             loadImage();
         }
 
         setJobDetails();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (job != null) {
+            outState.putParcelable(ARG_DETAIL_JOB, this.job);
+        } else {
+            outState.putParcelable(ARG_DETAIL_JOB, this.favoriteJob);
+        }
     }
 
     private void setJobDetails() {
@@ -123,12 +143,12 @@ public class DetailActivity extends AppCompatActivity {
         description.setText(job != null ? !TextUtils.isEmpty(job.getDescription())
                 ? HtmlCompat.fromHtml(job.getDescription(), 0) : no_description :
                 !TextUtils.isEmpty(favoriteJob.getDescription())
-                ? HtmlCompat.fromHtml(favoriteJob.getDescription(), 0) : no_description);
+                        ? HtmlCompat.fromHtml(favoriteJob.getDescription(), 0) : no_description);
     }
 
     private void loadImage() {
         int radius = getResources().getDimensionPixelSize(R.dimen.corner_radius);
-        if(job != null){
+        if (job != null) {
             if (!TextUtils.isEmpty(job.getCompany_logo())) {
                 GlideApp.with(this)
                         .load(job.getCompany_logo())
@@ -138,7 +158,7 @@ public class DetailActivity extends AppCompatActivity {
             } else {
                 companyLogo.setImageDrawable(getDrawableLogo(job.getCompany()));
             }
-        } else{
+        } else {
             if (!TextUtils.isEmpty(favoriteJob.getCompany_logo())) {
                 GlideApp.with(this)
                         .load(favoriteJob.getCompany_logo())
@@ -153,7 +173,8 @@ public class DetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_apply)
     void click_Apply() {
-        final String jobURL = AppConstants.REMOTEOK_URL + job.getId();
+        final String jobURL = job != null ? AppConstants.REMOTEOK_URL + job.getId() :
+                AppConstants.REMOTEOK_URL + favoriteJob.getId();
 
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent));

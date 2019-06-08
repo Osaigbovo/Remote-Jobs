@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,18 +26,18 @@
             style="@style/WidgetTitleTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/marginStart_widget_list_title"
             android:layout_marginStart="@dimen/marginStart_widget_list_title"
+            android:layout_marginEnd="@dimen/marginStart_widget_list_title"
             android:gravity="center"
             android:text="@string/app_name" />
 
     </LinearLayout>
 
     <FrameLayout
-        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@android:color/white">
 
         <ListView
             android:id="@+id/widget_list"
@@ -50,7 +51,7 @@
             android:id="@+id/widget_empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="@font/montserrat"
             android:gravity="center"
             android:text="@string/empty_job_list_no_saved_jobs"
             android:textAppearance="?android:textAppearanceLarge" />

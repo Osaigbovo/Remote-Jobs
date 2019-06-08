@@ -39,7 +39,7 @@ public class WishListIconView extends LottieAnimationView {
         super.setActivated(activated);
         activate = activated;
 
-        this.setSpeed(activated ? 1.0F : -2.0F);
+        this.setSpeed(activated ? 2.0F : -1.5F);
         this.setProgress(0.0F);
         this.playAnimation();
     }
