@@ -100,7 +100,7 @@ public class JobRepository {
     }
 
     public void getFreshJobs() {
-        FetchJobsIntentService.startActionGetRemoteJobs(context);
+        //FetchJobsIntentService.startActionGetRemoteJobs(context);
     }
 
     private Observable<Set<Integer>> savedJobIds() {

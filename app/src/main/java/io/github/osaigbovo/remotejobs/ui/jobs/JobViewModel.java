@@ -42,7 +42,7 @@ public class JobViewModel extends ViewModel {
     }
 
     void refresh(){
-        jobRepository.getFreshJobs();
+        //jobRepository.getFreshJobs();
     }
 
     @Override
